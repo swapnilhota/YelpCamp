@@ -44,7 +44,7 @@ const validateReview = (req, res, next) => {
     }
 }
 
-const isReviewAuthor = (req, res, next) => {
+const isReviewAuthor = async (req, res, next) => {
     const { id, reviewId } = req.params;
     const review = await Review.findById(reviewId);
     if (!review.author.equals(req.user._id)) {
