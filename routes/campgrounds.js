@@ -5,11 +5,11 @@ const Campground = require('../models/campground');
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
 const campgrounds = require('../controllers/campgrounds');
 
-router.get('/', catchAsync(campgrounds.index));
+router.route('/')
+    .get(catchAsync(campgrounds.index))
+    .post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground));
 
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
-
-router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground));
 
 router.get('/:id', catchAsync(campgrounds.showCampground));
 
