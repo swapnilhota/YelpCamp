@@ -9,14 +9,7 @@ router.get('/', catchAsync(campgrounds.index));
 
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
-router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
-    const campground = new Campground(req.body.campground);
-    campground.author = req.user._id;
-    await campground.save();
-    req.flash('success', 'Successfully made a new campground');
-    res.redirect(`/campgrounds/${campground._id}`);
-
-}))
+router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground));
 
 router.get('/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
