@@ -3,10 +3,10 @@ mapboxgl.accessToken = mapToken;
 var map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 4 // starting zoom
+    center: JSON.parse(coordinates), // starting position [lng, lat]
+    zoom: 9 // starting zoom
 });
 
 new mapboxgl.Marker()
-    .setLngLat([-74.5, 40])
+    .setLngLat(JSON.parse(coordinates))
     .addTo(map)
