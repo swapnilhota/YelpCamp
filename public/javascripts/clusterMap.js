@@ -102,14 +102,8 @@ map.on('load', function () {
     // description HTML from its properties.
     map.on('click', 'unclustered-point', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var mag = e.features[0].properties.mag;
-        var tsunami;
 
-        if (e.features[0].properties.tsunami === 1) {
-            tsunami = 'yes';
-        } else {
-            tsunami = 'no';
-        }
+        const text = e.features[0].properties.popUpMarkup;
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
@@ -121,7 +115,7 @@ map.on('load', function () {
         new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(
-                'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+                text
             )
             .addTo(map);
     });

@@ -12,6 +12,8 @@ imageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');     //to resize image using cloudinary api
 })
 
+const opts = { toJSON: { virtuals: true } };
+
 const campgroundSchema = new Schema({
     title: String,
     images: [imageSchema],
@@ -39,7 +41,12 @@ const campgroundSchema = new Schema({
             ref: "Review"
         }
     ]
-});
+}, opts);
+
+campgroundSchema.virtual('properties.popUpMarkup').get(function () {
+    const url = `/campgrounds/${this._id}`;
+    return `<strong><a href=${url}>${this.title}</a><strong>`;
+})
 
 // Delete via middleware
 campgroundSchema.post('findOneAndDelete', async function (doc) {
