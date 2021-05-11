@@ -17,6 +17,7 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const { param } = require('./routes/campgrounds');
 const User = require('./models/user');
+const ExpressError = require('./utils/ExpressError');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => {
