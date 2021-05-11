@@ -79,10 +79,10 @@ map.on('load', function () {
 
     // inspect a cluster on click
     map.on('click', 'clusters', function (e) {
-        var features = map.queryRenderedFeatures(e.point, {
+        const features = map.queryRenderedFeatures(e.point, {
             layers: ['clusters']
         });
-        var clusterId = features[0].properties.cluster_id;
+        const clusterId = features[0].properties.cluster_id;
         map.getSource('campgrounds').getClusterExpansionZoom(
             clusterId,
             function (err, zoom) {
@@ -101,9 +101,9 @@ map.on('load', function () {
     // the location of the feature, with
     // description HTML from its properties.
     map.on('click', 'unclustered-point', function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
+        const coordinates = e.features[0].geometry.coordinates.slice();
 
-        const text = e.features[0].properties.popUpMarkup;
+        const { popUpMarkup } = e.features[0].properties;
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
@@ -114,9 +114,7 @@ map.on('load', function () {
 
         new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(
-                text
-            )
+            .setHTML(popUpMarkup)
             .addTo(map);
     });
 
