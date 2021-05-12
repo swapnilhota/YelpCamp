@@ -5,11 +5,14 @@
             <div class="col">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Login</h5>
+                        <div class=" d-flex justify-content-center">
+                            <h5 class="card-title d-block mb-3">Login</h5>
+                        </div>
                         <form action="/login" method="POST" class="validated-form" novalidate>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input type="text" class="form-control" id="username" name="username" required
+                                    autofocus>
                                 <div class="valid-feedback">
                                     Looks Good!
                                 </div>
@@ -21,7 +24,9 @@
                                     Looks Good!
                                 </div>
                             </div>
-                            <button class="btn btn-success">Login</button>
+                            <div class="d-grid">
+                                <button class="btn btn-success">Login</button>
+                            </div>
                         </form>
                     </div>
                 </div>
