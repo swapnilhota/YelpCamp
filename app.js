@@ -19,6 +19,7 @@ const { param } = require('./routes/campgrounds');
 const User = require('./models/user');
 const ExpressError = require('./utils/ExpressError');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => {
@@ -50,6 +51,7 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(helmet());
 
 app.use(passport.initialize());
 app.use(passport.session());
